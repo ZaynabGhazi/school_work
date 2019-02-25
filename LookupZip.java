@@ -63,7 +63,7 @@ public class LookupZip{
 		 //set-up a loop to check if any zipcode from the arraylist matches the one from the file line
 		for(int i = 0; i <= lst.size()-1; i++){ 
 		    String zipcode = lst.get(i).getZip();
-		    if(code.matches(zipcode) && !Fields[LATITUDE].isEmpty() && !Fields[LONGITUDE].isEmpty()){
+		    if(code.equals(zipcode) && !Fields[LATITUDE].isEmpty() && !Fields[LONGITUDE].isEmpty()){
 			//retrieve zipcode data for potential creation of new object or modification of object instance variable
 			String state = lst.get(i).getState();
 			String town = lst.get(i).getTown();
@@ -96,7 +96,7 @@ public class LookupZip{
     public static Place lookupZip(ArrayList<Place> lst, String zip){
 	for(int i = 0; i < lst.size(); i++){
 	    String code = lst.get(i).getZip();
-	    if (code.matches(zip)) return  lst.get(i);
+	    if (code.equals(zip)) return  lst.get(i);
 	}
 	return null;
     }
