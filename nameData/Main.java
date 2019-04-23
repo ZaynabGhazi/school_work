@@ -1,0 +1,126 @@
+/* Name:    Zaynab Ghazi
+ * File:    Main.java
+ * Desc:
+ *
+ * The main driver program for Assignment 3.
+ *
+ * This program takes unlimited names and files( contaning yearly name data) 
+ * from the command-line, computes percentages and rankings and prints yearly stats
+ * corresponding to named queries. 
+ */
+
+import java.io.*;
+import java.util.*;
+
+
+public class Main{
+    public static void main(String[] args) throws FileNotFoundException {
+	
+	//designing command-line flags and storing queries
+	ArrayList<String>  femaleQueries = new ArrayList<String>();
+	ArrayList<String>  maleQueries = new ArrayList<String>();
+	for(int i=0; i< args.length; i++){
+	    if (args[i].equals("-f")) femaleQueries.add(args[i+1]);
+	    if (args[i].equals("-m")) maleQueries.add(args[i+1]);
+	}
+	//get filesnames from command-line and store them in an ArrayList
+       	ArrayList<String> fileNames= new ArrayList<String>();
+	for(int i=1; i<args.length;i++){
+	    if(!args[i-1].equals("-f") && !args[i-1].equals("-m") && !args[i].equals("-m") && !args[i].equals("-f"))
+		fileNames.add(args[i]);
+	}
+	//create two NameDLL to store male and female name objects
+	NameDLL maleNames = new NameDLL();
+	NameDLL femaleNames= new NameDLL();
+	//create placeholder for the total number of babies for each gender from ALL files 
+	int totalNumberOfMales =0;
+	int totalNumberOfFemales =0;
+	//create 3 ArrayLilsts to respectively store years of files and the yearly total number of babies from each gender (the years list is for a check such as year(i)'s data in element(i) of the lists
+	ArrayList<String> correspondingYears= new ArrayList<String>();
+	ArrayList<Integer> correspondingFemaleFileTotal = new ArrayList<Integer>();
+	ArrayList<Integer> correspondingMaleFileTotal = new ArrayList<Integer>();
+	
+	
+	//Create a for-loop to read and analyze every file
+	for(int j=0 ; j< fileNames.size();j++){
+	    String fileName = fileNames.get(j);
+	    String fileYear = fileName.substring(fileName.length()-8,fileName.length()-4);
+	    correspondingYears.add(j,fileYear);
+	    
+	    //update the 2 NameDLL with names and corresponding data from the file being read and return the yearly total numbers
+	    ArrayList<Integer> Totals = ReadFiles.parseFile(fileName,maleNames,femaleNames);
+	    int yearlyTotalNumberOfMales = Totals.get(0);
+	    int yearlyTotalNumberOfFemales = Totals.get(1);
+	    
+	    correspondingFemaleFileTotal.add(j,yearlyTotalNumberOfFemales);
+	    correspondingMaleFileTotal.add(j,yearlyTotalNumberOfMales);
+	    
+	    //updates total number of babies of a specific gender in all files/years
+	    totalNumberOfMales += yearlyTotalNumberOfMales;
+	    totalNumberOfFemales += yearlyTotalNumberOfFemales;
+
+	    }//allFiles were read
+	
+	//update total NUMBER of babies named a certain way
+	//create 2 ArrayLists of type Data to store total number of babies for each Name and its total rank
+	//Technique: match Name in (i) to Total data in (i-1)
+	ArrayList<Data> totalDataMale = new ArrayList<Data>();
+	ArrayList<Data> totalDataFemale = new ArrayList<Data>();
+	
+	//for Males:
+	ComputeData.updateTotalNumber(maleNames, totalDataMale);
+	//for Females:
+	ComputeData.updateTotalNumber(femaleNames, totalDataFemale);
+
+  	//update total ranking
+	//forMales:
+	ComputeData.updateTotalRank(maleNames,totalDataMale);
+	//for Females:
+	ComputeData.updateTotalRank(femaleNames,totalDataFemale);
+	
+	
+	//execute lookup for queries received from command line
+	//for Females:
+	ComputeData.executeQueries(femaleQueries, femaleNames, totalDataFemale, totalNumberOfFemales,correspondingYears,correspondingFemaleFileTotal);
+	//for Males:
+	ComputeData.executeQueries(maleQueries, maleNames, totalDataMale, totalNumberOfMales,correspondingYears,correspondingMaleFileTotal);
+	
+    }//main()
+}//class Main
+	
+
+
+	
+
+	
+
+		
+
+	
+	
+	
+
+      	    
+		
+			  
+	    
+		
+
+
+
+
+
+
+
+	
+    
+	
+	
+	    
+									    
+	
+	    
+
+	    
+	
+
