@@ -1,0 +1,42 @@
+import java.util.*;
+import java.io.*;
+
+public class Person implements Comparable<Person>{
+    private char sex;
+    private char race;
+    private int dob;
+    private int heightFt;
+    private String eyeColor;
+    private char build;
+
+    public Person(char a, char b, int c, int d, String e, char f){
+	this.sex =a;
+	this.race=b;
+	this.dob=c;
+	this.heightFt=d;
+	this.eyeColor=e;
+	this.build=f;
+    }
+    public int compareTo(Person other){
+	return this.getRef().compareTo(other.getRef());
+	
+    }
+    public String toString(){
+        return this.sex+" "+ this.eyeColor;
+    }
+    public boolean equals(Person other){
+	return this.compareTo(other) ==0;
+    }
+    //Unit-Test
+    public static void main(String[] args){
+	Person a = new Person('M','B',12,8,"BR",'M');
+	Person b = new Person('M','B',12,8,"BR",'M');
+	Person c = new Person('M','C',12,8,"BR",'M');
+	System.out.println( a.compareTo(b)+" "+ b.compareTo(c));
+    }
+    public String getRef(){
+	return this.sex+" "+this.race+" "+this.dob+" "+this.heightFt+" "+this.eyeColor+" "+this.build;
+    }
+	
+}
+    
