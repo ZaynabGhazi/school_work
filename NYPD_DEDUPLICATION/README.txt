@@ -1,8 +1,8 @@
-Contributor: Zaynab Ghazi
-How to compile:
-How to run:
-Known Bugs and limitations:
-Discussion:
+**Contributor:** Zaynab Ghazi
+**How to compile:**
+**How to run:**
+**Known Bugs and limitations:**
+**Discussion:**
 
 -- In order to decide uniqueness, I have chosen criteria that I believe satisfy the following:
 * very precise criterion that can validate identity
