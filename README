@@ -1,0 +1,34 @@
+Programs Files:
+    Part 1 and 2:
+        a.Array_sorting.c
+    Part 3 and 4:
+	a.RandomWalks.c
+	b.Report.pdf
+
+
+	
+How to Compile:
+    none
+How to Run:
+    none
+Script files:
+    Part 1:
+     part1    
+    Part 2:
+     part2
+    Part3:
+     part3
+
+    
+Special Instructions:
+
+   - to collect the report data, vary the defined constants:
+N     : dimension of Grid
+START : first position on grid
+TRIALS: number of trials
+
+Known Bugs or Limitations:
+   none
+
+Other comments:
+   none
